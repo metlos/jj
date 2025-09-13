@@ -3458,6 +3458,7 @@ fn test_fetch_with_fetch_tags_override() {
         repo.store(),
         "origin".as_ref(),
         &source_git_repo.path().display().to_string(),
+        None,
         gix::remote::fetch::Tags::None,
     )
     .unwrap();
@@ -3496,6 +3497,7 @@ fn test_fetch_with_fetch_tags_override() {
         repo.store(),
         "originAllTags".as_ref(),
         &source_git_repo.path().display().to_string(),
+        None,
         gix::remote::fetch::Tags::All,
     )
     .unwrap();
@@ -4562,6 +4564,7 @@ fn test_remote_remove_refs() {
         repo.store(),
         "foo".as_ref(),
         "https://example.com/",
+        None,
         Default::default(),
     )
     .unwrap();
@@ -4610,6 +4613,7 @@ fn test_remote_rename_refs() {
         repo.store(),
         "foo".as_ref(),
         "https://example.com/",
+        None,
         Default::default(),
     )
     .unwrap();
@@ -4685,6 +4689,7 @@ fn test_remote_add_with_tags_specification() {
             repo.store(),
             remote_name.as_ref(),
             "https://example.com/",
+            None,
             fetch_tags,
         )
         .unwrap();
@@ -4762,6 +4767,7 @@ fn test_set_remote_urls() {
         repo.store(),
         remote_name.as_ref(),
         "https://example.com/repo/path",
+        None,
         gix::remote::fetch::Tags::None,
     )
     .unwrap();

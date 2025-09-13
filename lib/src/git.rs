@@ -1831,6 +1831,7 @@ pub fn add_remote(
     store: &Store,
     remote_name: &RemoteName,
     url: &str,
+    push_url: Option<&str>,
     fetch_tags: gix::remote::fetch::Tags,
 ) -> Result<(), GitRemoteManagementError> {
     let git_repo = get_git_repo(store)?;
@@ -1852,6 +1853,12 @@ pub fn add_remote(
             gix::remote::Direction::Fetch,
         )
         .expect("default refspec to be valid");
+
+    if let Some(push_url) = push_url {
+        remote = remote
+            .push_url(push_url)
+            .map_err(GitRemoteManagementError::from_git)?;
+    }
 
     let mut config = git_repo.config_snapshot().clone();
     save_remote(&mut config, remote_name, &mut remote)?;
